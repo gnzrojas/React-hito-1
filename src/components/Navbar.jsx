@@ -35,6 +35,11 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <a className="nav-link text-white border border-white rounded mx-2" href="#">
+                🔒Logout
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link text-white border border-white rounded mx-2" href="#">
                 🔐Register
               </a>
             </li>
