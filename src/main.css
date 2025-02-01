@@ -3,3 +3,19 @@
     background-size: cover;
     height: 30vh;
 }
+
+.card{
+    display: flex;
+    text-align: center;
+    width: 30em;
+    flex-direction: column;
+    padding: 0.5em;
+    border: 1px solid #dbdbdb;
+
+}
+
+.botones-card{
+    display: flex;
+    justify-content: space-around;
+}
+

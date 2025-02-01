@@ -1,6 +1,8 @@
 import React from "react";
 
 const Navbar = () => {
+  const total = 25000;
+  const token = false;
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark">
       <div className="container-fluid">
@@ -30,12 +32,17 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <a className="nav-link text-white border border-white rounded mx-2" href="#">
-                🔐Login
+                🔓Profile
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link text-white border border-white rounded mx-2" href="#">
                 🔒Logout
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link text-white border border-white rounded mx-2" href="#">
+                🔐Login
               </a>
             </li>
             <li className="nav-item">
@@ -46,7 +53,7 @@ const Navbar = () => {
           </ul>
           
           <button className="btn border border-white text-white">
-            🛒 Total: $0
+            🛒 Total: $25000
           </button>
         </div>
       </div>
