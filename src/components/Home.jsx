@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import CardPizza from "./CardPizza";
+import Footer from "./Footer";
 
 const Home = () => {
   return (
@@ -35,6 +36,8 @@ m/o/pizzeria%2Fpizza-1239077_640_com.jpg?alt=media&token=e7cde87a-08d5-4040-
 ac54-90f6c31eb3e3"
         />
       </main>
+
+      <Footer />
     </>
   );
 };
