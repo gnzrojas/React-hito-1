@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Navbar = () => {
   const total = 25000;
@@ -9,8 +9,8 @@ const Navbar = () => {
         <button
           className="navbar-toggler"
           type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
@@ -30,30 +30,37 @@ const Navbar = () => {
                 🍕Home
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link text-white border border-white rounded mx-2" href="#">
-                🔓Profile
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link text-white border border-white rounded mx-2" href="#">
-                🔒Logout
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link text-white border border-white rounded mx-2" href="#">
-                🔐Login
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link text-white border border-white rounded mx-2" href="#">
-                🔐Register
-              </a>
-            </li>
+            {token ? (
+              <>
+                <li className="nav-item">
+                  <a className="nav-link text-white border border-white rounded mx-2" href="#">
+                    🔓Profile
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link text-white border border-white rounded mx-2" href="#">
+                    🔒Logout
+                  </a>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <a className="nav-link text-white border border-white rounded mx-2" href="#">
+                    🔐Login
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link text-white border border-white rounded mx-2" href="#">
+                    🔐Register
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
           
           <button className="btn border border-white text-white">
-            🛒 Total: $25000
+            🛒 Total: ${total.toLocaleString()}
           </button>
         </div>
       </div>
