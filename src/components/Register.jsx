@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useFormState } from "react-dom";
+import Swal from 'sweetalert2'
 
 function Register() {
   const [userEmail, setUserEmail] = useState('');
@@ -29,7 +30,12 @@ function handleSubmit(e) {
   const formValido = validateRegister()
 
   if (formValido){
-    alert('Te has registrado con éxito')
+    Swal.fire({
+      title: "Te has registrado con éxito",
+      icon: "success",
+      draggable: true
+    });
+
   } 
 }
 
@@ -66,7 +72,7 @@ console.log("errores: ", errores);
             <input
               type="password"
               value={userPassword}
-              className= {`form-control ${getErrorMessage('userEmail') ? 'is-invalid': ''}`}
+              className= {`form-control ${getErrorMessage('userPassword') ? 'is-invalid': ''}`}
               placeholder="Introduce tu contraseña"
               onChange={(e) => setUserPassword(e.target.value)}
               />

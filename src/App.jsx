@@ -11,8 +11,8 @@ const App = () => {
       <Navbar />
       <main className='main-content'>
         {/*<Home />
-        <Register />*/}
-        <Login />
+        <Login />*/}
+        <Register />
       </main>
 
       <Footer />
