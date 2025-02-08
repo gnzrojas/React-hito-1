@@ -8,6 +8,7 @@ function Register() {
   const [confirmarPassword, setConfirmarPassword] = useState('');
   const [errores, setErrores] = useState([])
 
+  //Función para validar formulario identificando errores
 function validateRegister() {
   const errores = [];
 
@@ -21,6 +22,7 @@ function validateRegister() {
   return errores.length === 0; //Devuelve true si no hay errores y false si hay errores
 }
 
+
 function handleSubmit(e) {
   e.preventDefault()
 
@@ -30,6 +32,15 @@ function handleSubmit(e) {
     alert('Te has registrado con éxito')
   } 
 }
+
+//Función para mostrar mensajes de error
+function getErrorMessage(field) {
+  const error = errores.find((err) => err.campo === field);
+  return error ? error.mensaje : null
+};
+
+console.log("errores: ", errores);
+
 
   return (
     <section className="register-container container-fluid">
@@ -42,9 +53,12 @@ function handleSubmit(e) {
             <input
               type="email"
               value={userEmail}
+              className= {`form-control ${getErrorMessage('userEmail') ? 'is-invalid': ''}`}
               placeholder="example@example"
               onChange={(e) => setUserEmail(e.target.value)}
               />
+              { getErrorMessage('userEmail') && (
+                <div className="invalid-feedback">{ getErrorMessage('userEmail') }</div>)}
           </div>
 
           <h4>Contraseña</h4>
@@ -52,9 +66,12 @@ function handleSubmit(e) {
             <input
               type="password"
               value={userPassword}
+              className= {`form-control ${getErrorMessage('userEmail') ? 'is-invalid': ''}`}
               placeholder="Introduce tu contraseña"
               onChange={(e) => setUserPassword(e.target.value)}
               />
+              { getErrorMessage('userPassword') && (
+                <div className="invalid-feedback">{getErrorMessage('userPassword') }</div>)}
           </div>
 
           <h4>Confirmar contraseña</h4>
@@ -62,9 +79,12 @@ function handleSubmit(e) {
             <input
               type="password"
               value={confirmarPassword}
+              className= {`form-control ${getErrorMessage('confirmarPassword') ? 'is-invalid': ''}`}
               placeholder="Introduce nuevamente tu contraseña"
               onChange={(e) => setConfirmarPassword(e.target.value)}
               />
+              { getErrorMessage('confirmarPassword') && (
+                <div className="invalid-feedback">{getErrorMessage('confirmarPassword') }</div>)}
           </div>
 
           <button type="submit" className = 'btn btn-primary w-100'>
