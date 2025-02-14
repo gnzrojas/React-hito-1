@@ -4,15 +4,17 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Register from './components/Register'
 import Login from './components/Login'
+import Cart from './components/Cart'
 
 const App = () => {
   return (
     <div className='app-container'>
       <Navbar />
+      {/* <Home /> */}
       <main className='main-content'>
-        {/*<Home />
-        <Login />*/}
-        <Register />
+        <Cart />
+        {/*<Login />
+        <Register />*/}
       </main>
 
       <Footer />
