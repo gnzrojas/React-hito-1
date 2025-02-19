@@ -10,10 +10,10 @@ const App = () => {
   return (
     <div className='app-container'>
       <Navbar />
-      {/* <Home /> */}
+      <Home />
       <main className='main-content'>
-        <Cart />
-        {/*<Login />
+        {/*<Cart />
+        <Login />
         <Register />*/}
       </main>
 
