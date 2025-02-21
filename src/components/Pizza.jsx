@@ -47,7 +47,7 @@ const Pizza = () => {
 
         <div className="d-flex justify-content-around">
         <h4>Precio: ${pizzasById.price.toLocaleString()}</h4>
-        <button className="btn btn-success">Añadir 🛒</button>
+        <button className="bg-dark text-white border rounded">Añadir 🛒</button>
         </div>
 
       </div>
