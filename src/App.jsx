@@ -1,5 +1,5 @@
 import Header from './components/Header'
-import Home from './components/Home'
+import Home from './pages/Home'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Pizza from './components/Pizza'
