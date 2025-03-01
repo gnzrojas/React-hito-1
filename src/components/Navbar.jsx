@@ -34,16 +34,16 @@ const Navbar = () => {
                 🍕Home
               </Link>
             </li>
+            <li className="nav-item">
+              <Link
+                className="nav-link text-white border border-white rounded mx-2"
+                to="/profile"
+              >
+                🔓Perfil
+              </Link>
+            </li>
             {token ? (
-              <>
-                <li className="nav-item">
-                  <a
-                    className="nav-link text-white border border-white rounded mx-2"
-                    href="#"
-                  >
-                    🔓Profile
-                  </a>
-                </li>
+              
                 <li className="nav-item">
                   <a
                     className="nav-link text-white border border-white rounded mx-2"
@@ -52,7 +52,7 @@ const Navbar = () => {
                     🔒Logout
                   </a>
                 </li>
-              </>
+              
             ) : (
               <>
                 <li className="nav-item">
