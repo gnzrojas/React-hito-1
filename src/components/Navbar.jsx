@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const total = 25000;
@@ -21,14 +22,16 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link text-white" href="#">
+              <Link className="nav-link text-white"
+                to="/">
                 Pizzeria Mamma Mia
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link text-white border border-white rounded mx-2" href="#">
+              <Link className="nav-link text-white border border-white rounded mx-2"
+                to = "/">
                 🍕Home
-              </a>
+              </Link>
             </li>
             {token ? (
               <>
@@ -46,22 +49,26 @@ const Navbar = () => {
             ) : (
               <>
                 <li className="nav-item">
-                  <a className="nav-link text-white border border-white rounded mx-2" href="#">
+                  <Link className="nav-link text-white border border-white rounded mx-2"
+                    to="/login">
                     🔐Login
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white border border-white rounded mx-2" href="#">
+                  <Link className="nav-link text-white border border-white rounded mx-2"
+                  to="/register">
                     🔐Register
-                  </a>
+                  </Link>
                 </li>
               </>
             )}
           </ul>
           
+            <Link to="/cart">
           <button className="btn border border-white text-white">
             🛒 Total: ${total.toLocaleString()}
           </button>
+            </Link>
         </div>
       </div>
     </nav>

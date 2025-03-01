@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import CardPizza from "../components/CardPizza";
+import { Link } from "react-router-dom";
 //import { pizzas } from "../data/pizzas.js";
 
 const Home = () => {
