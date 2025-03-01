@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const CardPizza = ({ pizza }) => {
     const { name, img, price, ingredients, desc } = pizza
@@ -22,7 +23,9 @@ const CardPizza = ({ pizza }) => {
 
         <p className='fs-4 fw-bold'>Precio: ${price.toLocaleString()}</p>
         <div className='botones-card'>
-            <button className='bg-light border rounded border-danger'>Ver más 👀</button>
+          <Link to="/pizza/p001" className="btn btn-info">
+              Ver más 👀
+          </Link>
             <button className='bg-dark text-white border rounded'>Añadir 🛒</button>
         </div> 
     </div>

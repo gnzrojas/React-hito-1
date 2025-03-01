@@ -46,7 +46,7 @@ const Pizza = () => {
         </ul>
 
         <div className="d-flex justify-content-around">
-        <h4>Precio: ${pizzasById.price.toLocaleString()}</h4>
+        <h4>Precio: ${pizzasById.price ? pizzasById.price.toLocaleString() : 'Cargando...'}</h4>
         <button className="bg-dark text-white border rounded">Añadir 🛒</button>
         </div>
 
