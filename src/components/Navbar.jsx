@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 const Navbar = () => {
-  const total = 25000;
-  const token = false;
+  const { cart } = useContext(CartContext);
+  const totalPrice = cart.reduce((total, item) => total + item.price * item.count, 0);
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
       <div className="container-fluid">
         <button
           className="navbar-toggler"
@@ -42,42 +44,38 @@ const Navbar = () => {
                 🔓Perfil
               </Link>
             </li>
-            {token ? (
-              
-                <li className="nav-item">
-                  <a
-                    className="nav-link text-white border border-white rounded mx-2"
-                    href="#"
-                  >
-                    🔒Logout
-                  </a>
-                </li>
-              
+            <li className="nav-item">
+              <a
+                className="nav-link text-white border border-white rounded mx-2"
+                href="#"
+              >
+                🔒Logout
+              </a>
+            </li>
             ) : (
-              <>
-                <li className="nav-item">
-                  <Link
-                    className="nav-link text-white border border-white rounded mx-2"
-                    to="/login"
-                  >
-                    🔐Login
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    className="nav-link text-white border border-white rounded mx-2"
-                    to="/register"
-                  >
-                    🔐Register
-                  </Link>
-                </li>
-              </>
-            )}
+            <>
+              <li className="nav-item">
+                <Link
+                  className="nav-link text-white border border-white rounded mx-2"
+                  to="/login"
+                >
+                  🔐Login
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link text-white border border-white rounded mx-2"
+                  to="/register"
+                >
+                  🔐Register
+                </Link>
+              </li>
+            </>
           </ul>
 
           <Link to="/cart">
             <button className="btn border border-white text-white">
-              🛒 Total: ${total.toLocaleString()}
+              🛒 Total: ${totalPrice.toLocaleString()}
             </button>
           </Link>
         </div>

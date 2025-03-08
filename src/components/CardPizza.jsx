@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 const CardPizza = ({ pizza }) => {
+  const { addToCart } = useContext(CartContext)
     const { name, img, price, ingredients, desc } = pizza
   return (
     <div className="card container">
@@ -26,7 +29,8 @@ const CardPizza = ({ pizza }) => {
           <Link to="/pizza/p001" className="btn btn-info">
               Ver más 👀
           </Link>
-            <button className='bg-dark text-white border rounded'>Añadir 🛒</button>
+            <button className='bg-dark text-white border rounded'
+            onClick={() => addToCart({ name, img, price })}>Añadir 🛒</button>
         </div> 
     </div>
   );
