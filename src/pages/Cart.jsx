@@ -1,50 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { pizzaCart } from "../data/pizzas";
+import { CartContext } from "../context/CartContext";
 
 const Cart = () => {
-  const [cart, setCart] = useState(pizzaCart);
-
-  const calcularTotal = () => {
-    let total = 0;
-    cart.forEach((item) => {
-      total += item.price * item.count;
-    });
-    return total;
-  };
-
-  const aumentarTotal = (id) => {
-    const carroMas = cart.map((item) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          count: item.count + 1,
-        };
-      }
-      return item;
-    });
-    setCart(carroMas);
-  };
-
-  const disminuirTotal = (id) => {
-    const carroMenos = cart
-      .map((item) => {
-        if (item.id === id) {
-          return {
-            ...item,
-            count: item.count - 1,
-          };
-        }
-        return item;
-      })
-      .filter((item) => item.count > 0);
-    setCart(carroMenos);
-  };
+  const { cart, increment, decrement, calculateTotal } = useContext(CartContext)
 
   return (
     <div className="container mt-5">
       <h2 className="text-center mb-4">Carrito de Compras</h2>
 
-      {cart.map((item) => (
+    {cart.length === 0 ? (
+      <p className="text-center">El carrito está vacío</p> 
+    
+    ) : (
+      
+      cart.map((item) => (
         <div className="card mb-3 mx-auto w-50" key={item.id}>
           <div className="row g-0 align-items-center">
             <div className="col-3 d-flex justify-content-center">
@@ -66,14 +36,14 @@ const Cart = () => {
               <div className="btn-group d-flex align-items-center">
                 <button
                   className="btn btn-outline-danger"
-                  onClick={() => disminuirTotal(item.id)}
+                  onClick={() => decrement(item.id)}
                 >
                   -
                 </button>
                 <span className="btn btn-light p-3">{item.count}</span>
                 <button
                   className="btn btn-outline-success"
-                  onClick={() => aumentarTotal(item.id)}
+                  onClick={() => increment(item.id)}
                 >
                   +
                 </button>
@@ -81,10 +51,13 @@ const Cart = () => {
             </div>
           </div>
         </div>
-      ))}
+      ))
+    )}
+
+
 
       <div className="text-end mt-4">
-        <h3>Total de la compra: ${calcularTotal().toLocaleString()}</h3>
+        <h3>Total de la compra: ${calculateTotal().toLocaleString()}</h3>
         <button className="btn btn-success m-2 btn-lg">Pagar</button>
       </div>
     </div>
