@@ -1,28 +1,42 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const CartContext = createContext(null);
 
 const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
 
   //Función para agregar productos al carrito
   const addToCart = ({ id, name, img, price }) => {
-    const productFindIndex = cart.findIndex((p) => p.id === id);
+    //Asegura que el precio sea numérico
+    const numericPrice = Number(price);
 
-    if (productFindIndex >= 0) {
-      const updatedCart = cart.map((item, index) =>
-        index === productFindIndex ? { ...item, count: item.count + 1 } : item
-      );
-      setCart(updatedCart);
-    } else {
-      setCart([...cart, { id, name, img, price, count: 1 }]);
+    //Verifica si el precio es válido
+    if (isNaN(numericPrice)) {
+      console.error(`Precio inválido para ${name}: ${price}`);
+      return;
     }
+
+    setCart((prevCart) => {
+      const productIndex = prevCart.findIndex((p) => p.id === id);
+      
+      if (productIndex !== -1) {
+        const updatedCart = [...prevCart];
+        updatedCart[productIndex] = {
+          ...updatedCart[productIndex],
+          count: updatedCart[productIndex].count+1
+        };
+        return updatedCart;
+      } else {
+        return [...prevCart, { id, name, img, price: numericPrice, count: 1 }];
+      }
+    });
   };
 
   //Funcion para incrementar cantidad de pizza en el carrito
   const increment = (id) => {
-    setCart(
-      cart.map((item) =>
+    setCart((prevCart) =>
+      prevCart.map((item) =>
         item.id === id ? { ...item, count: item.count + 1 } : item
       )
     );
@@ -31,21 +45,42 @@ const CartProvider = ({ children }) => {
   //Función para disminuir cantidad de pizza en el carrito
   const decrement = (id) => {
     setCart(
-      cart
-        .map((item) =>
-          item.id === id ? { ...item, counts: item.count - 1 } : item
-        )
-        .filter((item) => item.count > 0) //Elimina el carro cuando llega a 0
+      (prevCart) =>
+        prevCart
+          .map((item) =>
+            item.id === id ? { ...item, count: item.count - 1 } : item
+          )
+          .filter((item) => item.count > 0) //Se elimina el producto si llega a 0
     );
   };
 
-  //Función para calcular el total
-  const calculateTotal = () => {
-    return cart.reduce((total, item) => total + item.price * item.count, 0);
-  };
+  //Calcular el total cada vez que el carrito cambia
+  useEffect(() => {
+    const newTotal = cart.reduce((sum, item) => {
+      const itemPrice = Number(item.price);
+      const itemCount = Number(item.count);
+
+      if (isNaN(itemPrice) || isNaN(itemCount)) {
+        console.error(
+          `Valores inválidos para ${item.name}: precio = ${item.price}, cantidad = ${item.count}`
+        );
+        return sum;
+      }
+
+      return sum + (itemPrice * itemCount);
+    }, 0);
+
+    setTotal(newTotal);
+  }, [cart]);
+
+  useEffect(() => {
+    console.log("Estado actual del carrito: ", cart);
+  }, [cart]);
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, increment, decrement, calculateTotal }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, increment, decrement, total }}
+    >
       {children}
     </CartContext.Provider>
   );

@@ -1,9 +1,8 @@
 import { useContext, useState } from "react";
-import { pizzaCart } from "../data/pizzas";
 import { CartContext } from "../context/CartContext";
 
 const Cart = () => {
-  const { cart, increment, decrement, calculateTotal } = useContext(CartContext)
+  const { cart, increment, decrement, total } = useContext(CartContext)
 
   return (
     <div className="container mt-5">
@@ -28,7 +27,7 @@ const Cart = () => {
               <div className="card-body p-2">
                 <h6 className="card-title text-capitalize">{item.name}</h6>
                 <p className="card-text m-0">
-                  Precio: ${item.price.toLocaleString()}
+                  Precio: ${(item.price * item.count).toLocaleString()}
                 </p>
               </div>
             </div>
@@ -57,7 +56,7 @@ const Cart = () => {
 
 
       <div className="text-end mt-4">
-        <h3>Total de la compra: ${calculateTotal().toLocaleString()}</h3>
+        <h3>Total de la compra: ${total.toLocaleString()}</h3>
         <button className="btn btn-success m-2 btn-lg">Pagar</button>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { CartContext } from "../context/CartContext";
 
 const CardPizza = ({ pizza }) => {
   const { addToCart } = useContext(CartContext)
-    const { name, img, price, ingredients, desc } = pizza
+    const { id, name, img, price, ingredients, desc } = pizza
   return (
     <div className="card container">
       <img className = "border rounded" src= {img} alt={name} />
@@ -30,7 +30,7 @@ const CardPizza = ({ pizza }) => {
               Ver más 👀
           </Link>
             <button className='bg-dark text-white border rounded'
-            onClick={() => addToCart({ name, img, price })}>Añadir 🛒</button>
+            onClick={() => addToCart({ id, name, img, price })}>Añadir 🛒</button>
         </div> 
     </div>
   );

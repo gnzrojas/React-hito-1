@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 const Pizza = () => {
   const [pizzasById, setPizzasById] = useState({});
+  const { addToCart } = useContext(CartContext)
 
   const getPizzaById = async () => {
     try {
@@ -21,6 +23,7 @@ const Pizza = () => {
   useEffect(() => {
     getPizzaById();
   }, []);
+
   return (
     <div
       className="container mt-4 d-flex p-2 gap-3"
@@ -47,7 +50,8 @@ const Pizza = () => {
 
         <div className="d-flex justify-content-around">
         <h4>Precio: ${pizzasById.price ? pizzasById.price.toLocaleString() : 'Cargando...'}</h4>
-        <button className="bg-dark text-white border rounded">Añadir 🛒</button>
+        <button className="bg-dark text-white border rounded" 
+        onClick={() => addToCart(pizzasById)}>Añadir 🛒</button>
         </div>
 
       </div>
