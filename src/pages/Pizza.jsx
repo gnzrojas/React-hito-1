@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { useParams } from "react-router-dom";
 
 const Pizza = () => {
+  const { idPizza } = useParams()
   const [pizzasById, setPizzasById] = useState({});
   const { addToCart } = useContext(CartContext)
 
   const getPizzaById = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/pizzas/p001");
+      const response = await fetch(`http://localhost:5000/api/pizzas/${idPizza}`);
 
       if (!response.ok) {
         throw new Error(`HTTP ERROR! status: ${response.status}`);

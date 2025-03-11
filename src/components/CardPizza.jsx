@@ -26,7 +26,7 @@ const CardPizza = ({ pizza }) => {
 
         <p className='fs-4 fw-bold'>Precio: ${price.toLocaleString()}</p>
         <div className='botones-card'>
-          <Link to="/pizza/p001" className="btn btn-info">
+          <Link to={`/pizza/${id}`} className="btn btn-info">
               Ver más 👀
           </Link>
             <button className='bg-dark text-white border rounded'
