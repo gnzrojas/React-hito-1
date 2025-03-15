@@ -9,35 +9,58 @@ import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import { Route, Routes, useLocation } from "react-router-dom";
 import CartProvider from "./context/CartContext";
-import UserProvider from "./context/UserContext";
+import { UserContext } from "./context/UserContext";
+import { useContext } from "react";
+import ProtectedRoute from "./components/ProtectedRoute";
+import RedirectRoute from "./components/RedirectRoute";
 
 const App = () => {
+  const { user } = useContext(UserContext);
   const location = useLocation();
   const isHome = location.pathname === "/";
   return (
-    <UserProvider>
-      <CartProvider>
-        <div className="app-container">
-          <Navbar />
+    <CartProvider>
+      <div className="app-container">
+        <Navbar />
 
-          {isHome ? (
-            <Home />
-          ) : (
-            <main className="main-content">
-              <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/pizza/:idPizza" element={<Pizza />} />
-                <Route path="/*" element={<NotFound />} />
-                <Route path="/profile" element={<Profile />} />
-              </Routes>
-            </main>
-          )}
-          <Footer />
-        </div>
-      </CartProvider>
-    </UserProvider>
+        {isHome ? (
+          <Home />
+        ) : (
+          <main className="main-content">
+            <Routes>
+              <Route
+                path="/login"
+                element={
+                  <RedirectRoute>
+                    <Login />
+                  </RedirectRoute>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <RedirectRoute>
+                    <Register />
+                  </RedirectRoute>
+                }
+              />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/pizza/:idPizza" element={<Pizza />} />
+              <Route path="/*" element={<NotFound />} />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </main>
+        )}
+        <Footer />
+      </div>
+    </CartProvider>
   );
 };
 
