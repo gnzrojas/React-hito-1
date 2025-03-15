@@ -1,10 +1,24 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import { UserContext } from "../context/UserContext";
 
 const Navbar = () => {
   const { cart } = useContext(CartContext);
-  const totalPrice = cart.reduce((total, item) => total + item.price * item.count, 0);
+  const { user, logOut } = useContext(UserContext);
+
+  //Manejar cierre de sesión
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    logOut();
+    navigate('/');
+  }
+
+  const totalPrice = cart.reduce(
+    (total, item) => total + item.price * item.count,
+    0
+  );
+  //const token = true;
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
@@ -36,41 +50,49 @@ const Navbar = () => {
                 🍕Home
               </Link>
             </li>
-            <li className="nav-item">
-              <Link
-                className="nav-link text-white border border-white rounded mx-2"
-                to="/profile"
-              >
-                🔓Perfil
-              </Link>
-            </li>
-            <li className="nav-item">
-              <a
-                className="nav-link text-white border border-white rounded mx-2"
-                href="#"
-              >
-                🔒Logout
-              </a>
-            </li>
+
+            { user ? (
+              <>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link text-white border border-white rounded mx-2"
+                    to="/profile"
+                  >
+                    🔓Profile
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <button
+                    className="nav-link text-white border border-white rounded mx-2 btn btn-outline-danger"
+                    onClick={handleLogOut}
+                  >
+                    🔒Logout
+                  </button>
+                </li>
+              </>
+
             ) : (
-            <>
-              <li className="nav-item">
-                <Link
-                  className="nav-link text-white border border-white rounded mx-2"
-                  to="/login"
-                >
-                  🔐Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link text-white border border-white rounded mx-2"
-                  to="/register"
-                >
-                  🔐Register
-                </Link>
-              </li>
-            </>
+
+              <>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link text-white border border-white rounded mx-2"
+                    to="/login"
+                  >
+                    🔐Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    className="nav-link text-white border border-white rounded mx-2"
+                    to="/register"
+                  >
+                    🔐Register
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
 
           <Link to="/cart">

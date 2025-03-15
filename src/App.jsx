@@ -9,32 +9,35 @@ import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import { Route, Routes, useLocation } from "react-router-dom";
 import CartProvider from "./context/CartContext";
+import UserProvider from "./context/UserContext";
 
 const App = () => {
   const location = useLocation();
   const isHome = location.pathname === "/";
   return (
-    <CartProvider>
-      <div className="app-container">
-        <Navbar />
+    <UserProvider>
+      <CartProvider>
+        <div className="app-container">
+          <Navbar />
 
-        {isHome ? (
-          <Home />
-        ) : (
-          <main className="main-content">
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/cart" element={<Cart />} />
-              <Route path="/pizza/:idPizza" element={<Pizza />} />
-              <Route path="/*" element={<NotFound />} />
-              <Route path="/profile" element={<Profile />} />
-            </Routes>
-          </main>
-        )}
-        <Footer />
-      </div>
-    </CartProvider>
+          {isHome ? (
+            <Home />
+          ) : (
+            <main className="main-content">
+              <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/pizza/:idPizza" element={<Pizza />} />
+                <Route path="/*" element={<NotFound />} />
+                <Route path="/profile" element={<Profile />} />
+              </Routes>
+            </main>
+          )}
+          <Footer />
+        </div>
+      </CartProvider>
+    </UserProvider>
   );
 };
 
